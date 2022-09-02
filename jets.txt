@@ -1,0 +1,3 @@
+Fighter, F18 SuperHornet, 1190, 2069, 65000000
+Fighter, F16 Eagle, 1319, 2622, 12700000
+Cargo, C17, 590, 2784, 340000000
