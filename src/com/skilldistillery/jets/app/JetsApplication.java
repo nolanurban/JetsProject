@@ -11,9 +11,11 @@ import java.util.Set;
 import com.skilldistillery.jets.entities.Airfield;
 import com.skilldistillery.jets.entities.CargoJet;
 import com.skilldistillery.jets.entities.FighterJet;
+import com.skilldistillery.jets.entities.Jet;
 import com.skilldistillery.jets.entities.PassengerJet;
 
 public class JetsApplication {
+	Airfield ourHangar = new Airfield();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -21,15 +23,13 @@ public class JetsApplication {
 		startUp.run();
 	}
 	public void run() {
-//		printMenu(); 
 		Scanner keyboard = new Scanner(System.in);
 		boolean check = false;
-		Airfield ourHangar = new Airfield();
-		
-		System.out.println(ourHangar.getHangar().get(0).getSpeed());
-		System.out.println(ourHangar.getHangar().get(1));
+
 		while (!check) {
-			check = switchMenu(takeInput(keyboard));
+			printMenu(); 
+			check = switchMenu(takeInput(keyboard));		
+			
 		}
 		keyboard.close();
 	}
@@ -54,19 +54,36 @@ public class JetsApplication {
 		boolean setFlag = false;
 		switch (numberChoice) {
 		case 1: 
-			// list the fleet here
-			System.out.println("This is a test to make sure we're looping.");
-			break;
+			System.out.println("Model\tSpeed\tRange\tPrice");
+			for(Jet jet: ourHangar.getHangar()) {
+				System.out.println(
+						jet.getModel() + "\t" +
+						jet.getSpeed() + "\t" +
+						jet.getRange() + "\t" +
+						jet.getPrice() + "\t" 
+						
+						);
+			}
+			break;  // fix this cosmetic issue later
 		
 		case 2:
-			System.out.println("This is a test to make sure we're looping.");
-			break;
+			for(Jet jet: ourHangar.getHangar()) 
+				jet.fly();
+				break;
 		
 			// call fly for all jets 
 		case 3:
-			System.out.println("This is a test to make sure we're looping.");
+			int winner = 0;
+			double fastest = ourHangar.getHangar().get(0).getSpeed();
+			for (int i = 1 ; i < ourHangar.getHangar().size() ; i++) {
+				if (fastest < ourHangar.getHangar().get(i).getSpeed()) {
+					fastest = ourHangar.getHangar().get(i).getSpeed();
+					winner = i;
+				}
+			}
+			System.out.print("The fastest jet in the hangar is the " + ourHangar.getHangar().get(winner).getModel());
+			System.out.println(" with a top speed of " + ourHangar.getHangar().get(winner).getSpeed() + " MPH.");
 			break;
-			// find out which jet is the fastest Jet fastestJet()
 		case 4:
 			System.out.println("This is a test to make sure we're looping.");
 			break;

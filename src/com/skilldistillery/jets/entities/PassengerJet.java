@@ -16,6 +16,13 @@ public class PassengerJet extends Jet {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "PassengerJet [getSpeedInMach()=" + getSpeedInMach() + ", getModel()=" + getModel() + ", getSpeed()="
+				+ getSpeed() + ", getRange()=" + getRange() + ", getPrice()=" + getPrice() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
 
 
 }
