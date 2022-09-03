@@ -2,13 +2,16 @@ package com.skilldistillery.jets.entities;
 // This should build our jets
 
 public abstract class Jet {
-
+	
 	private String model;
 	private double speed;
 	private int range;
 	private long price;
 	
 	
+	public double getSpeedInMach() {
+		return speed / 767.269148;  // calculate roughly to Mach without an altitude.
+	}
 	public String getModel() {
 		return model;
 	}
@@ -41,7 +44,7 @@ public abstract class Jet {
 		this.price = price;
 	}
 	
-
+	public abstract void fly();
 
 	
 }

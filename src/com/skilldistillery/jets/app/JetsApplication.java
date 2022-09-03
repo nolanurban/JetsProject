@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.skilldistillery.jets.entities.Airfield;
+import com.skilldistillery.jets.entities.CargoJet;
+import com.skilldistillery.jets.entities.FighterJet;
+import com.skilldistillery.jets.entities.PassengerJet;
+
 public class JetsApplication {
 
 	public static void main(String[] args) {
@@ -16,9 +21,13 @@ public class JetsApplication {
 		startUp.run();
 	}
 	public void run() {
-		printMenu(); 
+//		printMenu(); 
 		Scanner keyboard = new Scanner(System.in);
 		boolean check = false;
+		Airfield ourHangar = new Airfield();
+		
+		System.out.println(ourHangar.getHangar().get(0).getSpeed());
+		System.out.println(ourHangar.getHangar().get(1));
 		while (!check) {
 			check = switchMenu(takeInput(keyboard));
 		}
@@ -86,9 +95,6 @@ public class JetsApplication {
 		default:
 			System.out.println("Whoa there, you mistyped. Try again.");
 		}
-		return setFlag;
-		
+		return setFlag;	
 	}
-	
-
 }
