@@ -30,27 +30,26 @@ public class Airfield {
 
 	public List<Jet> fillHangar() {
 	    BufferedReader reader = null;
-	    Jet abc = new FighterJet(null, 0, 0, 0);
 	    List<Jet> newJetList = new ArrayList<>();
+	    
 	    try {
 	      reader = new BufferedReader(new FileReader("jets.txt"));
 	      String line;
 	      while((line = reader.readLine()) != null) {
 		    String[] container = line.split(",");
-
-	// conditional based on container[0] 
-		    if (container[0].equals("Fighter")) // these are not working at all
-		    	newJetList.add(new FighterJet(container[1], // model
+		// conditional based on container[0] 
+		    if (container[0].equals("Fighter"))
+		    	newJetList.add(new CargoJet(container[0],container[1], // model
 		    			Double.parseDouble(container[2]), // speed
 		    			Integer.parseInt(container[3]), // range
 		    			Long.parseLong(container[4]))); // price
 		    if (container[0].equals("Cargo"))
-		    	newJetList.add(new CargoJet(container[1], // model
+		    	newJetList.add(new CargoJet(container[0],container[1], // model
 		    			Double.parseDouble(container[2]), // speed
 		    			Integer.parseInt(container[3]), // range
 		    			Long.parseLong(container[4]))); // price
 		    if (container[0].equals("Passenger"))
-		    	newJetList.add(new PassengerJet(container[1], // model
+		    	newJetList.add(new PassengerJet(container[0],container[1], // model
 		    			Double.parseDouble(container[2]), // speed
 		    			Integer.parseInt(container[3]), // range
 		    			Long.parseLong(container[4])));	// price  

@@ -71,24 +71,33 @@ public class JetsApplication {
 				jet.fly();
 				break;
 		
-			// call fly for all jets 
 		case 3:
-			int winner = 0;
-			double fastest = ourHangar.getHangar().get(0).getSpeed();
-			for (int i = 1 ; i < ourHangar.getHangar().size() ; i++) {
-				if (fastest < ourHangar.getHangar().get(i).getSpeed()) {
-					fastest = ourHangar.getHangar().get(i).getSpeed();
-					winner = i;
+			Jet jetWithFastestSpeed = ourHangar.getHangar().get(0);
+			for (Jet jet:ourHangar.getHangar()) {
+				if (jetWithFastestSpeed.getSpeed() < jet.getSpeed()) {
+					jetWithFastestSpeed = jet;
 				}
 			}
-			System.out.print("The fastest jet in the hangar is the " + ourHangar.getHangar().get(winner).getModel());
-			System.out.println(" with a top speed of " + ourHangar.getHangar().get(winner).getSpeed() + " MPH.");
+			System.out.print("The jet with the fastest speed in the hangar is the " + jetWithFastestSpeed.getModel());
+			System.out.println(" with a maximum speed of " + jetWithFastestSpeed.getSpeed() + " miles per hour.");	
 			break;
 		case 4:
-			System.out.println("This is a test to make sure we're looping.");
+			Jet jetWithLongestRange = ourHangar.getHangar().get(0);
+			for (Jet jet:ourHangar.getHangar()) {
+				if (jetWithLongestRange.getRange() < jet.getRange()) {
+					jetWithLongestRange = jet;
+				}
+			}
+			System.out.print("The jet with the longest range in the hangar is the " + jetWithLongestRange.getModel());
+			System.out.println(" with a maximum range of " + jetWithLongestRange.getRange() + " miles.");
 			break;
-			// find out which jet has the longest range Jet longestRange()
 		case 5:
+			for (Jet jet: ourHangar.getHangar()) {
+				if (jet.getType().equals("Cargo")) { 
+					System.out.println(jet);
+					((CargoJet) jet).loadCargo();
+				}
+			}
 			System.out.println("This is a test to make sure we're looping.");
 			break;
 			// load all cargo jets loadCargo();
