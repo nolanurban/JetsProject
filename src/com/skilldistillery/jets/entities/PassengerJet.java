@@ -9,7 +9,6 @@ public class PassengerJet extends Jet {
 
 	@Override
 	public void fly() {
-		System.out.println("PassengerJet ready to go!");
 		System.out.println(super.getModel() + " is going to go to max speed of " + super.getSpeed() + "MPH for a maximum range of " + super.getRange() + " miles.");
 
 		// TODO Auto-generated method stub

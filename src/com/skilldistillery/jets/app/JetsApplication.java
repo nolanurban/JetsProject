@@ -16,22 +16,23 @@ import com.skilldistillery.jets.entities.PassengerJet;
 
 public class JetsApplication {
 	Airfield ourHangar = new Airfield();
+	static Scanner keyboard = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JetsApplication startUp = new JetsApplication();
 		startUp.run();
+		keyboard.close();
+
 	}
 	public void run() {
-		Scanner keyboard = new Scanner(System.in);
+	
 		boolean check = false;
 
 		while (!check) {
 			printMenu(); 
 			check = switchMenu(takeInput(keyboard));		
-			
 		}
-		keyboard.close();
 	}
 	public void printMenu() {
 		System.out.println(""
@@ -73,7 +74,7 @@ public class JetsApplication {
 		
 		case 3:
 			Jet jetWithFastestSpeed = ourHangar.getHangar().get(0);
-			for (Jet jet:ourHangar.getHangar()) {
+			for (Jet jet: ourHangar.getHangar()) {
 				if (jetWithFastestSpeed.getSpeed() < jet.getSpeed()) {
 					jetWithFastestSpeed = jet;
 				}
@@ -83,7 +84,7 @@ public class JetsApplication {
 			break;
 		case 4:
 			Jet jetWithLongestRange = ourHangar.getHangar().get(0);
-			for (Jet jet:ourHangar.getHangar()) {
+			for (Jet jet: ourHangar.getHangar()) {
 				if (jetWithLongestRange.getRange() < jet.getRange()) {
 					jetWithLongestRange = jet;
 				}
@@ -93,27 +94,29 @@ public class JetsApplication {
 			break;
 		case 5:
 			for (Jet jet: ourHangar.getHangar()) {
-				if (jet.getType().equals("Cargo")) { 
-					System.out.println(jet);
+				if (jet.getType().equals("Cargo")) { // re-wrote all of Jet class to create a getType to use .equals()
 					((CargoJet) jet).loadCargo();
 				}
 			}
-			System.out.println("This is a test to make sure we're looping.");
 			break;
-			// load all cargo jets loadCargo();
+
 		case 6: 
-			System.out.println("This is a test to make sure we're looping.");
+			for (Jet jet: ourHangar.getHangar()) {
+				if (jet.getType().equals("Fighter")) { 
+					((FighterJet) jet).fight();
+				}
+			}
 			break;
-			// Fighter jets go do something 
 			
 		case 7:
-			System.out.println("This is a test to make sure we're looping.");
+			
+			newJetMenu();
 			break;
-			// Add a jet to the Hangar ArrayList call to Hangar.add()
+
 		case 8:
-			System.out.println("This is a test to make sure we're looping.");
+			removeJetMenu();
 			break;
-			// Delete a jet, using Hangar.remove();
+
 		case 9:
 			System.out.println("Exiting from the program, thanks for stopping by.");
 			setFlag = true;
@@ -122,5 +125,87 @@ public class JetsApplication {
 			System.out.println("Whoa there, you mistyped. Try again.");
 		}
 		return setFlag;	
+	}
+	public void removeJetMenu() {
+		
+		boolean passGo = false;
+		int number = 1;
+		while(!passGo) {
+			for(Jet jet: ourHangar.getHangar()) {
+				System.out.println(number + ". " +
+						jet.getModel() + "\t" +
+						jet.getSpeed() + "\t" +
+						jet.getRange() + "\t" +
+						jet.getPrice() + "\t" 
+						
+						);
+				number++;
+			}
+			
+			System.out.println("Please enter which plane you would like to remove: ");
+			int choice = takeInput(keyboard) - 1;
+			if (choice >= 0 && choice <= ourHangar.getHangar().size()) {
+				ourHangar.removeJet(choice); // I should probably check if this will be valid
+				passGo = true;
+			}
+			else System.out.println("Invalid selection, try again!");
+		}
+			System.out.println("Jet removed!");
+	
+	}
+		
+	
+	
+	
+	
+	public void newJetMenu() {
+		String type = ""; 
+		boolean passGo = false;
+		while(!passGo) {
+			
+
+			System.out.println("Please enter the type of jet: \n1. Fighter Jet\n2. CargoJet\n3. PassengerJet\n ");
+
+			int typeInput = takeInput(keyboard);
+			
+			if (typeInput == 1) {
+				type = "Fighter";
+				passGo = true;
+			}
+			else if (typeInput == 2) { 
+				type = "Cargo";
+				passGo = true;
+			}
+			else if (typeInput == 3) {
+				type = "Passenger";
+				passGo = true;
+			}
+			else { 
+				System.out.println("Error, please re-enter the value");
+				passGo = false;
+			}
+
+		}
+
+		// part 2 of options
+
+		System.out.println("Please enter a model: ");
+		String model = keyboard.next();
+		System.out.println("Please enter a speed: ");
+		double speed = keyboard.nextDouble();
+		System.out.println("Please enter a range: ");
+		int range = keyboard.nextInt();
+		System.out.println("Please enter a cost: ");
+		long price = keyboard.nextLong();
+		
+		if (type.equals("Fighter"))
+			ourHangar.pushNewJet(new FighterJet(type, model, speed, range, price));
+		
+		if (type.equals("Cargo"))
+			ourHangar.pushNewJet(new CargoJet(type, model, speed, range, price));
+		
+		if (type.equals("Passenger"))
+			ourHangar.pushNewJet(new PassengerJet(type, model, speed, range, price));
+		System.out.println("New Jet added!");
 	}
 }

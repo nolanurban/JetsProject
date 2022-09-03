@@ -23,7 +23,12 @@ public class Airfield {
 	public List<Jet> getHangar() {
 		return Hangar;
 	}
-
+	public void pushNewJet(Jet newJet) {
+		Hangar.add(newJet);
+	}
+	public void removeJet(int index) {
+		Hangar.remove(index);
+	}
 	public void setHangar(List<Jet> hangar) {
 		Hangar = hangar;
 	}
@@ -37,9 +42,9 @@ public class Airfield {
 	      String line;
 	      while((line = reader.readLine()) != null) {
 		    String[] container = line.split(",");
-		// conditional based on container[0] 
+		
 		    if (container[0].equals("Fighter"))
-		    	newJetList.add(new CargoJet(container[0],container[1], // model
+		    	newJetList.add(new FighterJet(container[0],container[1], // model
 		    			Double.parseDouble(container[2]), // speed
 		    			Integer.parseInt(container[3]), // range
 		    			Long.parseLong(container[4]))); // price

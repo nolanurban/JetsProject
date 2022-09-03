@@ -7,11 +7,10 @@ public class CargoJet extends Jet implements CargoCarrier {
 		// TODO Auto-generated constructor stub
 	}
 	public void loadCargo() {
-		System.out.println("Loading up the Cargo Plane with Tons of Stuff!");
+		System.out.println("Loading up the " + getModel() + " Cargo Plane with Tons of Stuff!");
 	}
 	@Override
 	public void fly() {
-		System.out.println("Cargo Jet, flight in progress!");
 		System.out.println(super.getModel() + " is going to go to max speed of " + super.getSpeed() + "MPH for a maximum range of " + super.getRange() + " miles.");
 	}
 	@Override
