@@ -11,7 +11,8 @@ public class CargoJet extends Jet implements CargoCarrier {
 	}
 	@Override
 	public void fly() {
-		System.out.println(super.getModel() + " is going to go to max speed of " + super.getSpeed() + "MPH for a maximum range of " + super.getRange() + " miles.");
+		System.out.print(super.getModel() + " is going to go to max speed of " + super.getSpeed() + "MPH for a maximum range of " + super.getRange() + " miles for a total flight time of : ");
+		System.out.printf("%.2f \n", super.getRange()/super.getSpeed());
 	}
 	@Override
 	public String toString() {
